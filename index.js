@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-
+const path = require('path');
 const app = express();
 const PORT = 3009;
 
@@ -8,10 +8,12 @@ const PORT = 3009;
 app.use(bodyParser.json());
 
 const users = [];
+// Use public
+app.use(express.static(path.join(__dirname, 'Website')));
 
 // GET endpoint to retrieve all users
 app.get('/users', (req, res) => {
-  res.sendFile("./Html/index.html", {root : __dirname});
+  res.sendFile("./Website/Html/index.html", {root : __dirname});
 });
 // GET endpoint to retrieve one user by ID
 app.get('/users/:id', (req, res) => {
